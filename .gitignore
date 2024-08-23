@@ -1,0 +1,11 @@
+env/
+db/
+__pycache__/
+application_key.json
+ai-data.json
+
+auth_key.json
+
+
+# Tasks
+*_solution.py
