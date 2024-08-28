@@ -21,8 +21,8 @@ class DocumentProcessor:
                 temp_file_name= f"{original_name}_{unique_id}{file_extention}"
                 temp_file_path= os.path.join(tempfile.gettempdir(), temp_file_name)    
                 
-                print(temp_file_name,"/n")
-                print(temp_file_path)
+                # print(temp_file_name,"/n")
+                # print(temp_file_path)
                 
                 with open(temp_file_path, 'wb') as f:
                     f.write(uploaded_file.getvalue())
