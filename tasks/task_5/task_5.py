@@ -49,11 +49,10 @@ class ChromaCollectionCreator:
             chunk_size=1000,
             chunk_overlap=200,
             length_function=len,
-            is_separator_regex=False,
+            is_separator_regex=False
         )
         
-        
-        text_chunks = list(map(lambda page: page.page_content, self.processor.pages))
+        text_chunks = [page.page_content for page in self.processor.pages]
         texts = text_splitter.create_documents(text_chunks)
         
         if texts is not None:
@@ -65,9 +64,9 @@ class ChromaCollectionCreator:
             st.success("Successfully created Chroma Collection!", icon="✅")
         
         else:
-            st.error("Failde to create a Chrom Collection!!", icon= "🚨") 
+            st.error("Failed to create a Chroma Collection!!", icon= "🚨") 
         
-    def query_chroms_collection(self, query)-> Document :
+    def query_chroma_collection(self, query)-> Document :
         
         if self.db:
             docs= self.db.similarity_search_with_relevance_scores(query)
