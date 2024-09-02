@@ -8,6 +8,14 @@ from tasks.task_3.task_3 import DocumentProcessor
 from tasks.task_4.task_4 import EmbeddingClient
 from tasks.task_5.task_5 import ChromaCollectionCreator
 
+'''
+This file is the Quiz builder.
+1 > creates a form for users to upload their files.
+2 > User can input their topic/s for quiz generation i.e. user's query in textbox
+3 > user can also select number of questions to generate  
+'''
+
+
 if __name__ == "__main__":
     st.header("Gemini Quizzify")
 
@@ -24,8 +32,10 @@ if __name__ == "__main__":
         embed_client= EmbeddingClient(**embed_config)
         chroma_creator= ChromaCollectionCreator(processor, embed_client)
         
+        # Collecting user's files
         processor.ingest_documents()
         
+        # creates a form to let user to input their quiz topic and number of questions
         with st.form("Load Data to Chroma"):
             st.subheader("Quiz Builder")
             st.write("Select PDFs for Ingestion, then topic for the quiz, and click Generate Quiz!")
@@ -37,16 +47,16 @@ if __name__ == "__main__":
                                                step= 1)        
 
             submitted= st.form_submit_button("Generate Quiz!")
-        
-            document= None
-        
-            
+
+            # the 'document' variable has the first page of the content related to the users topic generation query 
+            document= None            
         
             if submitted:
                 chroma_creator.create_chroma_collection()
                 
                 document= chroma_creator.query_chroma_collection(quiz_topic)
                 
+            
     if document:
         screen.empty()
         with st.container():

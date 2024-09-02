@@ -7,7 +7,7 @@ if os.path.exists(key_path):
 else:
     raise FileNotFoundError(f"The file {key_path} does not exist.")
 
-
+## Uncomment to check to your google credientials are working as expected
 # from google.auth import credentials
 # from google.auth.exceptions import DefaultCredentialsError
 # import google.auth
@@ -18,6 +18,11 @@ else:
 # except DefaultCredentialsError as e:
 #     print(f"Failed to authenticate: {e}")
 
+'''
+Creates a Chroma database collection for the vector enbeddings
+1 > separate the documents into chunks
+2 > create a chromaDB collection for the chunks
+'''
 import sys
 import streamlit as st
 sys.path.append(os.path.abspath('../../'))
@@ -52,6 +57,7 @@ class ChromaCollectionCreator:
             is_separator_regex=False
         )
         
+        # Creating text chunks
         text_chunks = [page.page_content for page in self.processor.pages]
         texts = text_splitter.create_documents(text_chunks)
         
@@ -66,6 +72,7 @@ class ChromaCollectionCreator:
         else:
             st.error("Failed to create a Chroma Collection!!", icon= "🚨") 
         
+    # to create a chroma collection for the user's query
     def query_chroma_collection(self, query)-> Document :
         
         if self.db:

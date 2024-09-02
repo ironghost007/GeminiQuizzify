@@ -1,5 +1,11 @@
 from langchain_google_vertexai import VertexAIEmbeddings
 
+'''
+This file is to create the vector embeddings leveraging google cloud platform's VertexAI
+
+'''
+
+
 class EmbeddingClient:
     
     def __init__(self, model_name, project, location):
@@ -9,10 +15,12 @@ class EmbeddingClient:
             location= location
         )
         
+    # creates vector embedding for the user's query
     def embed_query(self, query):
         vectors= self.client.embed_query(query)
         return vectors
     
+    # creates vector embedding for the processed documents
     def embed_documents(self, documents):
         try:
             self.client.embed_documents(documents)
