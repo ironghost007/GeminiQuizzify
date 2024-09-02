@@ -3,12 +3,14 @@ from langchain_community.document_loaders import PyPDFLoader
 import os
 import tempfile
 import uuid
-'''
-This file creates a simple document processor. 
-1 > creates a form to accepts multiple PDF files using streamlit.
-2 > generates unique names for the submitted file/s to avoid clash.
-3 > processes them into multiple documents using PyPDFLoader  
-'''
+
+
+# This file creates a simple document processor. 
+# 1 > creates a form to accepts multiple PDF files using streamlit.
+# 2 > generates unique names for the submitted file/s to avoid clash.
+# 3 > processes them into multiple documents using PyPDFLoader  
+
+
 class DocumentProcessor:
     
     def __init__(self):

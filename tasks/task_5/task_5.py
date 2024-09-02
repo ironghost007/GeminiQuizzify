@@ -18,11 +18,11 @@ else:
 # except DefaultCredentialsError as e:
 #     print(f"Failed to authenticate: {e}")
 
-'''
-Creates a Chroma database collection for the vector enbeddings
-1 > separate the documents into chunks
-2 > create a chromaDB collection for the chunks
-'''
+
+# Creates a Chroma database collection for the vector enbeddings
+# 1 > separate the documents into chunks
+# 2 > create a chromaDB collection for the chunks
+
 import sys
 import streamlit as st
 sys.path.append(os.path.abspath('../../'))

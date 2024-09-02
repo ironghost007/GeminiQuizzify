@@ -1,10 +1,7 @@
 from langchain_google_vertexai import VertexAIEmbeddings
 
-'''
-This file is to create the vector embeddings leveraging google cloud platform's VertexAI
 
-'''
-
+# This file creates the vector embeddings leveraging google cloud platform's VertexAI
 
 class EmbeddingClient:
     

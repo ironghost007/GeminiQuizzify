@@ -8,12 +8,11 @@ from tasks.task_3.task_3 import DocumentProcessor
 from tasks.task_4.task_4 import EmbeddingClient
 from tasks.task_5.task_5 import ChromaCollectionCreator
 
-'''
-This file is the Quiz builder.
-1 > creates a form for users to upload their files.
-2 > User can input their topic/s for quiz generation i.e. user's query in textbox
-3 > user can also select number of questions to generate  
-'''
+
+# This file is the Quiz builder.
+# 1 > creates a form for users to upload their files.
+# 2 > User can input their topic/s for quiz generation i.e. user's query in textbox
+# 3 > user can also select number of questions to generate  
 
 
 if __name__ == "__main__":
