@@ -4,9 +4,9 @@ import streamlit as st
 
 sys.path.append(os.path.abspath('../../'))
 
-from tasks.task_3.task_3 import DocumentProcessor
-from tasks.task_4.task_4 import EmbeddingClient
-from tasks.task_5.task_5 import ChromaCollectionCreator
+from tasks.Document_Ingestion.document_ingestion import DocumentProcessor
+from tasks.Embedding_Client_Creator.embedding_client_creator import EmbeddingClient
+from tasks.Chroma_Collection_Creator.chroma_collection_creator import ChromaCollectionCreator
 
 
 # This file is the Quiz builder.

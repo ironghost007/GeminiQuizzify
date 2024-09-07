@@ -26,8 +26,8 @@ else:
 import sys
 import streamlit as st
 sys.path.append(os.path.abspath('../../'))
-from tasks.task_3.task_3 import DocumentProcessor
-from tasks.task_4.task_4 import EmbeddingClient
+from tasks.Document_Ingestion.document_ingestion import DocumentProcessor
+from tasks.Embedding_Client_Creator.embedding_client_creator import EmbeddingClient
 
 from langchain_core.documents import Document
 from langchain.text_splitter import CharacterTextSplitter
