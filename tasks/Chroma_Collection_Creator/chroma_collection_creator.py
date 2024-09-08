@@ -1,24 +1,5 @@
 import os
 
-key_path = "/Users/suryaae/Radical AI/GeminiQuizzify/auth_key.json"
-
-if os.path.exists(key_path):
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = key_path
-else:
-    raise FileNotFoundError(f"The file {key_path} does not exist.")
-
-## Uncomment to check to your google credientials are working as expected
-# from google.auth import credentials
-# from google.auth.exceptions import DefaultCredentialsError
-# import google.auth
-
-# try:
-#     credentials, project = google.auth.default()
-#     print(f"Authenticated with project: {project}")
-# except DefaultCredentialsError as e:
-#     print(f"Failed to authenticate: {e}")
-
-
 # Creates a Chroma database collection for the vector enbeddings
 # 1 > separate the documents into chunks
 # 2 > create a chromaDB collection for the chunks
