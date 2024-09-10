@@ -22,3 +22,5 @@ __pycache__/
 
 *.sqlite3
 *.bin
+
+Quiz_Questions_Generator
