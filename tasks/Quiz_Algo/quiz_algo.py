@@ -38,14 +38,14 @@ except DefaultCredentialsError as e:
 
 class QuizGenerator:
     def __init__(self, topic=None, num_questions=1, vectorstore=None):
-
+        """
         # Initializes the QuizGenerator with a required topic, the number of questions for the quiz,
         # and an optional vectorstore for querying related information.
 
         # :param topic: A string representing the required topic of the quiz.
         # :param num_questions: An integer representing the number of questions to generate for the quiz, up to a maximum of 10.
         # :param vectorstore: An optional vectorstore instance (e.g., ChromaDB) to be used for querying information related to the quiz topic.
-        
+        """
         if not topic:
             self.topic = "General Knowledge"
         else:
@@ -89,19 +89,18 @@ class QuizGenerator:
 
         This method should handle any setup required to interact with the LLM, including authentication,
         setting up any necessary parameters, or selecting a specific model.
-
+        
         :return: An instance or configuration for the LLM.
         """
         self.llm = VertexAI(
             model_name = "gemini-pro",
-            temperature = 0.3, # Increased for less deterministic questions 
+            temperature = 0.5, 
             max_output_tokens = 1000
         )
 
     def generate_question_with_vectorstore(self):
         """
         Generates a quiz question based on the topic provided using a vectorstore
-
         :return: A JSON object representing the generated quiz question.
         """
         if not self.llm:
@@ -111,7 +110,6 @@ class QuizGenerator:
         
         from langchain_core.runnables import RunnablePassthrough, RunnableParallel
 
-        # Enable a Retriever
         retriever = self.vectorstore.as_retriever()
         
         # Use the system template to create a PromptTemplate
@@ -125,17 +123,21 @@ class QuizGenerator:
 
         # Invoke the chain with the topic as input
         response = chain.invoke(self.topic)
+        
         return response
     
     def generate_quiz(self) -> list:
-
-        self.question_bank = []
+        """
+        This method generates the questions for the quiz
+        :return: a list of JSON object
+        """
         
+        self.question_bank = []
         for _ in range(self.num_questions): 
                            
             question_str= self.generate_question_with_vectorstore()
-            # print(f"Raw response: {question_str}")
 
+            # sometimes the json output generates " ```json|```" so this needs to be removed
             cleaned_question_str = re.sub(r"```json|```", "", question_str).strip()
             
             try: 
@@ -145,17 +147,18 @@ class QuizGenerator:
                 print("Failed to decode question JSON")
                 continue 
             
+            # Each generated question is validated in the question bank to check for duplicates
             if self.validate_question(question):
                 print("Successfully generated unique question")
                 
                 self.question_bank.append(question)
             
+            # if the dupilicate is deducted then model is made to regenerate questions for next 3 tries
             else:
                 print("Duplicate or invalid question detected")
                 
                 for i in range(3): #Retry limit of 3 attempts
                     question_str = self.generate_question_with_vectorstore()
-                    # print(f"Raw response: {question_str}")
                     cleaned_question_str = re.sub(r"```json|```", "", question_str).strip()
                     
                     try:
@@ -174,12 +177,16 @@ class QuizGenerator:
                         print("Duplicate or invalid question detected")
                         continue
             
+            # Time delay introduced to reduce request rate, preventing 429 ResourceExhausted error
             time.sleep(8)
                              
         return self.question_bank  
     
     def validate_question(self, question: dict) -> bool:
-        
+        """
+        This method checks for any duplicate questions from generated question bank
+        :return: Bool value
+        """
         if 'question' not in question:
             raise ValueError("The provided dictionary must contain a 'question' key.")
 
@@ -190,8 +197,7 @@ class QuizGenerator:
             if existing_question['question'] == question_text:
                 is_unique = False  
                 break
-
-
+            
         return is_unique      
     
 
