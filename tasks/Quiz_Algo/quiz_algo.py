@@ -77,7 +77,7 @@ class QuizGenerator:
                     {{"key": "D", "value": "<choice>"}}
                 ],
                 "answer": "<answer key from choices list>",
-                "explanation": "<explanation as to why the answer is correct>"
+                "explanation": "<correct choice and explanation as to why the answer is correct>"
             }}
             
             Context: {context}
@@ -94,8 +94,8 @@ class QuizGenerator:
         """
         self.llm = VertexAI(
             model_name = "gemini-pro",
-            temperature = 0.5, 
-            max_output_tokens = 1000
+            temperature = 0.2, 
+            max_output_tokens = 1500
         )
 
     def generate_question_with_vectorstore(self):
@@ -178,7 +178,7 @@ class QuizGenerator:
                         continue
             
             # Time delay introduced to reduce request rate, preventing 429 ResourceExhausted error
-            time.sleep(8)
+            time.sleep(10)
                              
         return self.question_bank  
     
