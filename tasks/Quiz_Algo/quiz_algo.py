@@ -58,15 +58,20 @@ class QuizGenerator:
         self.vectorstore = vectorstore
         self.llm = None
         self.question_bank = [] # Initialize the question bank to store questions
+        self.prev_questions = ["Who is the president of the US?"]
         self.system_template = """
             You are a subject matter expert on the topic: {topic}
             
-            Follow the instructions to create a quiz question:
-            1. Generate a question based on the topic provided and context as key "question"
-            2. Provide 4 multiple choice answers to the question as a list of key-value pairs "choices"
-            3. Provide the correct answer for the question from the list of answers as key "answer"
-            4. Provide an explanation as to why the answer is correct as key "explanation"
+            these are your previously generated questions: {previous_questions}
             
+            Follow the instructions to create a quiz question:
+            1. Generate a diverse question based on the topic provided and context as key "question"
+            2. Each question should touch a random subtopic of the given topic and it should not be same or similar to the previously generated questions.
+            3. Check the previously generated questions, make sure the new question is not similar to any of the previous questions.
+            4. Provide 4 multiple choice answers to the question as a list of key-value pairs "choices"
+            5. Provide the correct answer for the question from the list of answers as key "answer"
+            6. Provide an explanation as to why the answer is correct as key "explanation"
+                        
             You must respond as a JSON object with the following structure:
             {{
                 "question": "<question>",
@@ -93,9 +98,9 @@ class QuizGenerator:
         :return: An instance or configuration for the LLM.
         """
         self.llm = VertexAI(
-            model_name = "gemini-pro",
-            temperature = 0.2, 
-            max_output_tokens = 1500
+            model_name = "gemini-1.5-pro",
+            temperature = 0.6, 
+            max_output_tokens = 800
         )
 
     def generate_question_with_vectorstore(self):
@@ -115,8 +120,13 @@ class QuizGenerator:
         # Use the system template to create a PromptTemplate
         prompt = PromptTemplate.from_template(self.system_template)
         
+        def get_previous_questions(_):
+            return "\n".join(self.prev_questions)
+        
         setup_and_retrieval = RunnableParallel(
-            {"context": retriever, "topic": RunnablePassthrough()}
+            {"context": retriever, 
+             "topic": RunnablePassthrough(),
+             "previous_questions": get_previous_questions}
         )
         # Create a chain with the Retriever, PromptTemplate, and LLM
         chain = setup_and_retrieval | prompt | self.llm 
@@ -152,6 +162,7 @@ class QuizGenerator:
                 print("Successfully generated unique question")
                 
                 self.question_bank.append(question)
+                self.prev_questions.append(question['question']) 
             
             # if the dupilicate is deducted then model is made to regenerate questions for next 3 tries
             else:
@@ -171,6 +182,7 @@ class QuizGenerator:
                     if self.validate_question(question):
                         print("Successfully generated unique question")
                         self.question_bank.append(question)
+                        self.prev_questions.append(question['question']) 
                         break
                     
                     else:
