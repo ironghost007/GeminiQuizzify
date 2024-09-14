@@ -66,12 +66,15 @@ Gemini Quizzify is an innovative, Generative AI-powered quiz application that tr
 4. **Quiz Presentation**: The generated quiz is displayed to the user with multiple-choice answers and explanations for the correct answers.
 
 ## 💻 Screenshots
-### Quiz Builder
-![Quiz Builder](Sample Screnshots/Screenshot 2024-09-13 at 8.06.00 PM.png)
 
-![Questions](Sample Screnshots/Screenshot 2024-09-13 at 8.07.04 PM.png)
+### Quiz Builder Screen
+![Quiz Builder](screenshots/Screenshot%202024-09-13%20at%208.06.00%20PM.png)
 
-![Questions](Sample Screnshots/Screenshot 2024-09-13 at 8.07.20 PM.png)
+### Generated Quiz Questions
+![Generated Quiz Questions 1](screenshots/Screenshot%202024-09-13%20at%208.07.04%20PM.png)
+
+![Generated Quiz Questions 2](screenshots/Screenshot%202024-09-13%20at%208.07.20%20PM.png)
+
 
 ## 🤖 Future Enhancements
 - Support for additional document types.
