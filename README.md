@@ -68,12 +68,12 @@ Gemini Quizzify is an innovative, Generative AI-powered quiz application that tr
 ## 💻 Screenshots
 
 ### Quiz Builder Screen
-![Quiz Builder](screenshots/Screenshot%202024-09-13%20at%208.06.00%20PM.png)
+![Quiz Builder](https://github.com/ironghost007/GeminiQuizzify/blob/main/screenshots/Screenshot%202024-09-13%20at%208.06.00%E2%80%AFPM.png)
 
 ### Generated Quiz Questions
-![Generated Quiz Questions 1](screenshots/Screenshot%202024-09-13%20at%208.07.04%20PM.png)
+![Generated Quiz Questions 1](https://github.com/ironghost007/GeminiQuizzify/blob/main/screenshots/Screenshot%202024-09-13%20at%208.07.20%E2%80%AFPM.png)
 
-![Generated Quiz Questions 2](screenshots/Screenshot%202024-09-13%20at%208.07.20%20PM.png)
+![Generated Quiz Questions 2](https://github.com/ironghost007/GeminiQuizzify/blob/main/screenshots/Screenshot%202024-09-13%20at%208.07.04%E2%80%AFPM.png)
 
 
 ## 🤖 Future Enhancements
