@@ -65,6 +65,14 @@ Gemini Quizzify is an innovative, Generative AI-powered quiz application that tr
 3. **Quiz Generation**: Once a topic is selected, the application uses the Vertex AI LLM to generate quiz questions related to that topic. It ensures that the generated questions are unique and contextually accurate.
 4. **Quiz Presentation**: The generated quiz is displayed to the user with multiple-choice answers and explanations for the correct answers.
 
+## 💻 Screenshots
+### Quiz Builder
+![Quiz Builder](Sample Screnshots/Screenshot 2024-09-13 at 8.06.00 PM.png)
+
+![Questions](Sample Screnshots/Screenshot 2024-09-13 at 8.07.04 PM.png)
+
+![Questions](Sample Screnshots/Screenshot 2024-09-13 at 8.07.20 PM.png)
+
 ## 🤖 Future Enhancements
 - Support for additional document types.
 - Real-time collaboration features allowing multiple users to create and take quizzes together.
